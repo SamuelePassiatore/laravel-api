@@ -10,6 +10,7 @@ class Project extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $with = ['author'];
     protected $fillable = ['title', 'image', 'description', 'url', 'slug', 'is_public', 'type_id'];
 
     // Allocate the relation with types
