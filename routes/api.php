@@ -19,5 +19,8 @@ use App\Http\Controllers\Api\ProjectController;
 //     return $request->user();
 // });
 
-// All api routes
+// Api routes for projects list
 Route::apiResource('projects', ProjectController::class);
+
+// Api route single project
+Route::get('/projects/{project}', [PostController::class, 'show']);
