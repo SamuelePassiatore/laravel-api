@@ -67,7 +67,8 @@ class ProjectController extends Controller
         $type = Type::find($id);
         if (!$type) return response(null, 404);
 
-        $projects = $type->projects;
+        // $projects = $type->projects;
+        $projects = Project::where('type_id', $type->id)->with('type', 'technologies')->paginate(5);
 
         // Assemble url image in backend
         foreach ($projects as $project) {
