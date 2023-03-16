@@ -23,4 +23,4 @@ use App\Http\Controllers\Api\ProjectController;
 Route::apiResource('projects', ProjectController::class);
 
 // Api route single project
-Route::get('/projects/{project}', [ProjectController::class, 'show']);
+Route::get('/projects/{slug}', [ProjectController::class, 'show']);
