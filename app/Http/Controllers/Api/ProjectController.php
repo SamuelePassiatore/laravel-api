@@ -74,6 +74,6 @@ class ProjectController extends Controller
             if ($project->image) $project->image = url('storage/' . $project->image);
             else $project->image = 'https://marcolanci.it/utils/placeholder.jpg';
         }
-        return response()->json($projects);
+        return response()->json(compact('projects', 'type'));
     }
 }
