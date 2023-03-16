@@ -19,6 +19,7 @@ class ProjectController extends Controller
         // Assemble url image in backend
         foreach ($projects as $project) {
             if ($project->image) $project->image = url('storage/' . $project->image);
+            else $project->image = 'https://marcolanci.it/utils/placeholder.jpg';
         }
         return response()->json($projects);
     }
@@ -41,6 +42,7 @@ class ProjectController extends Controller
 
         // Assemble url image in backend
         if ($project->image) $project->image = url('storage/' . $project->image);
+        else $project->image = 'https://marcolanci.it/utils/placeholder.jpg';
         return response()->json($project);
     }
 
@@ -65,11 +67,12 @@ class ProjectController extends Controller
         $type = Type::find($id);
         if (!$type) return response(null, 404);
 
-        $projects = $type->projects->with('type', 'technologies');
+        $projects = $type->projects;
 
         // Assemble url image in backend
         foreach ($projects as $project) {
             if ($project->image) $project->image = url('storage/' . $project->image);
+            else $project->image = 'https://marcolanci.it/utils/placeholder.jpg';
         }
         return response()->json($projects);
     }

@@ -24,3 +24,6 @@ Route::apiResource('projects', ProjectController::class);
 
 // Api route single project
 Route::get('/projects/{slug}', [ProjectController::class, 'show']);
+
+//Api route recover projects of one type
+Route::get('/types/{id}/projects', [ProjectController::class, 'typeProjectsIndex']);
