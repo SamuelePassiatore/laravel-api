@@ -58,4 +58,9 @@ class Project extends Model
         $date = $this->$date_column;
         return Carbon::parse($date)->diffForHumans();
     }
+
+    public function getAbstract($length = 50)
+    {
+        return substr($this->description, 0, $length);
+    }
 }
