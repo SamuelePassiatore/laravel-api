@@ -101,10 +101,7 @@ class ProjectController extends Controller
         $project->save();
 
         if ($project->is_public) {
-            $email = new ProjectPublicationMail($project);
-            // $user_email = Auth::user()->email;
-            $author_email = $project->author->email;
-            Mail::to($author_email)->send($email);
+            $this->sendPublicationMail($project);
         }
 
         // Relate projects with technologies
@@ -176,10 +173,7 @@ class ProjectController extends Controller
         $project->update($data);
 
         if ($initial_status !== $project->is_public) {
-            $email = new ProjectPublicationMail($project);
-            // $user_email = Auth::user()->email;
-            $author_email = $project->author->email;
-            Mail::to($author_email)->send($email);
+            $this->sendPublicationMail($project);
         }
 
         // Assign technologies
@@ -259,14 +253,19 @@ class ProjectController extends Controller
         $project->save();
 
         if ($project->author) {
-            $email = new ProjectPublicationMail($project);
-            // $user_email = Auth::user()->email;
-            $author_email = $project->author->email;
-            Mail::to($author_email)->send($email);
+            $this->sendPublicationMail($project);
         }
 
         return redirect()->back()
             ->with('message', "'$project->title' project has been successfully $action")
             ->with('type', $type);
+    }
+
+    private function sendPublicationMail(Project $project)
+    {
+        $email = new ProjectPublicationMail($project);
+        // $user_email = Auth::user()->email;
+        $author_email = $project->author->email;
+        Mail::to($author_email)->send($email);
     }
 }
