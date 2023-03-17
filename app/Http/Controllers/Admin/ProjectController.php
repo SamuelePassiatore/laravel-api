@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Mail;
 use App\Models\Project;
 use App\Models\Type;
 use App\Models\Technology;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\ProjectPublicationMail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
@@ -239,6 +241,14 @@ class ProjectController extends Controller
         $action = $project->is_public ? 'published' : 'drafted';
         $type = $project->is_public ? 'success' : 'info';
         $project->save();
+
+        if ($project->is_public && $project->author_email) {
+            $email = new ProjectPublicationMail();
+            // $user_email = Auth::user()->email;
+            $author_email = $project->author->email;
+            Mail::to($author_email)->send($email);
+        }
+
         return redirect()->back()
             ->with('message', "'$project->title' project has been successfully $action")
             ->with('type', $type);
