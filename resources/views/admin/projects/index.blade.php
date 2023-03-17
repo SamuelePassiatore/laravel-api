@@ -49,7 +49,6 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
-                <th scope="col">Slug</th>
                 <th scope="col">Type</th>
                 <th scope="col">Technology</th>
                 <th scope="col">Status</th>
@@ -63,7 +62,6 @@
                     <th scope="row">{{ $project->id }}</th>
                     <td>{{ $project->title }}</td>
                     <td>{{ $project->author ? $project->author->name : 'Anonymous' }}</td>
-                    <td>{{ $project->slug }}</td>
                     <td>
                         @if ($project->type)
                             <span class="badge text-white" style="background-color: {{ $project->type->color }}">
@@ -123,7 +121,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td scope="row" colspan="9" class="text-center">There aren't projects in portfolio with these
+                    <td scope="row" colspan="8" class="text-center">There aren't projects in portfolio with these
                         characteristics</td>
                 </tr>
             @endforelse
