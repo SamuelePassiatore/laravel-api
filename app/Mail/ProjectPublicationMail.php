@@ -42,10 +42,11 @@ class ProjectPublicationMail extends Mailable
     {
         $project = $this->project;
         $text = $this->project->is_public ? 'New project published' : 'Project drafted';
+        $url = env('APP_FRONTEND_URL') . "/projects/$project->slug";
 
         return new Content(
             markdown: 'mails.projects.published',
-            with: compact('project', 'text'),
+            with: compact('project', 'text', 'url'),
         );
     }
 

@@ -1,13 +1,16 @@
 <x-mail::message>
-    # {{ $project->title }}
+    <h2>{{ $project->title }}</h2>
+    <h3>{{ $project->type?->label }}</h3>
+    <address>
+        @if ($project->author)
+            By {{ $project->author->name }}
+        @else
+            Anonymous
+        @endif
+    </address>
+    <p>{{ $project->getAbstract() }}</p>
+    <p>{{ $project->getDate('updated_at') }}</p>
 
-
-    A project was deleted
-
-    <x-mail::button :url="''">
-        Button Text
-    </x-mail::button>
-
-    Thanks,<br>
+    Thanks,
     {{ config('app.name') }}
 </x-mail::message>
