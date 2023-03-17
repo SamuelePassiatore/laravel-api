@@ -242,7 +242,7 @@ class ProjectController extends Controller
         $type = $project->is_public ? 'success' : 'info';
         $project->save();
 
-        if ($project->is_public && $project->author) {
+        if ($project->author) {
             $email = new ProjectPublicationMail($project);
             // $user_email = Auth::user()->email;
             $author_email = $project->author->email;

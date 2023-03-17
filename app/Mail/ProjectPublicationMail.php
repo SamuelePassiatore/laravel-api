@@ -40,9 +40,15 @@ class ProjectPublicationMail extends Mailable
      */
     public function content(): Content
     {
+        $text = $this->project->is_public ? 'New project published' : 'Project removed';
+
         return new Content(
             view: 'mails.projects.published',
-            with: ['title' => $this->project->title],
+            with: [
+                'title' => $this->project->title,
+                'author' => $this->project->author->name,
+                'text' => $text,
+            ],
         );
     }
 
