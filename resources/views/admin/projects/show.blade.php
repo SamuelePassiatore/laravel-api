@@ -44,7 +44,12 @@
                     </div>
                     <div class="my-2"><strong>Status: </strong> {{ $project->is_public ? 'Public' : 'Private' }}
                     </div>
-                    <div class="my-2"><strong>Last modification: </strong><time>{{ $project->updated_at }}</time> </div>
+                    <div class="my-2"><strong>Last modification:
+                        </strong><time>{{ $project->getDate('updated_at') }}</time>
+                    </div>
+                    <div class="my-2"><strong>Creation:
+                        </strong><time>{{ $project->getDate('created_at') }}</time>
+                    </div>
                 </div>
             </div>
 

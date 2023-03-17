@@ -19,7 +19,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Slug</th>
                 <th scope="col">Url</th>
-                <th scope="col">Update at</th>
+                <th scope="col">Deleted at</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -30,7 +30,7 @@
                     <td>{{ $project->title }}</td>
                     <td>{{ $project->slug }}</td>
                     <td>{{ $project->url }}</td>
-                    <td>{{ $project->updated_at }}</td>
+                    <td>{{ $project->getDate('deleted_at') }}</td>
                     <td>
                         <div class="d-flex">
                             <form action="{{ route('admin.projects.trash.restore', $project->id) }}" method="POST"

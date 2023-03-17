@@ -32,18 +32,30 @@ class Project extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function getCreatedAt()
+    // public function getCreatedAt()
+    // {
+    //     return $this->formatDate($this->created_at);
+    // }
+
+    // public function getUpdatedAt()
+    // {
+    //     return $this->formatDate($this->updated_at);
+    // }
+
+    // public function getDeletedAt()
+    // {
+    //     return $this->formatDate($this->deleted_at);
+    // }
+
+    public function getDate($date_column)
     {
-        return Carbon::create($this->created_at)->format('d-m-Y H:i:s');
+        $date = $this->$date_column;
+        return Carbon::create($date)->format('d-m-Y H:i:s');
     }
 
-    public function getUpdatedAt()
+    public function getDateDiff($date_column)
     {
-        return Carbon::create($this->updated_at)->format('d-m-Y H:i:s');
-    }
-
-    public function getDeletedAt()
-    {
-        return Carbon::create($this->deleted_at)->format('d-m-Y H:i:s');
+        $date = $this->$date_column;
+        return Carbon::parse($date)->diffForHumans();
     }
 }

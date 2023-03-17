@@ -52,7 +52,7 @@
                 <th scope="col">Type</th>
                 <th scope="col">Technology</th>
                 <th scope="col">Status</th>
-                <th scope="col">Update at</th>
+                <th scope="col">Last Update</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -96,7 +96,7 @@
                             </i>
                         @endif
                     </td>
-                    <td>{{ $project->updated_at }}</td>
+                    <td>{{ $project->getDateDiff('updated_at') }}</td>
                     <td>
                         <div class="d-flex">
                             <a class="btn btn-sm btn-primary" href="{{ route('admin.projects.show', $project->id) }}">
