@@ -100,6 +100,13 @@ class ProjectController extends Controller
 
         $project->save();
 
+        if ($project->is_public) {
+            $email = new ProjectPublicationMail($project);
+            // $user_email = Auth::user()->email;
+            $author_email = $project->author->email;
+            Mail::to($author_email)->send($email);
+        }
+
         // Relate projects with technologies
         if (Arr::exists($data, 'technologies')) $project->technologies()->attach($data['technologies']);
 
@@ -139,6 +146,8 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        $initial_status = $project->is_public;
+
         $request->validate([
             'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id)],
             'image' => 'nullable|image',
@@ -165,6 +174,13 @@ class ProjectController extends Controller
         $data['is_public'] = Arr::exists($data, 'is_public');
 
         $project->update($data);
+
+        if ($initial_status !== $project->is_public) {
+            $email = new ProjectPublicationMail($project);
+            // $user_email = Auth::user()->email;
+            $author_email = $project->author->email;
+            Mail::to($author_email)->send($email);
+        }
 
         // Assign technologies
         if (Arr::exists($data, 'technologies')) $project->technologies()->sync($data['technologies']);
