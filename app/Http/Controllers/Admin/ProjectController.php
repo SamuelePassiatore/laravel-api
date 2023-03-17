@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Models\Technology;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\DeletedProjectMail;
 use App\Mail\ProjectPublicationMail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -191,6 +192,12 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
+
+        $email = new DeletedProjectMail($project);
+        // $user_email = Auth::user()->email;
+        $author_email = $project->author->email;
+        Mail::to($author_email)->send($email);
+
         return to_route('admin.projects.index')
             ->with('message', "'$project->title' project has been successfully deleted")
             ->with('type', 'success');

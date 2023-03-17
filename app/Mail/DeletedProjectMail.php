@@ -2,15 +2,15 @@
 
 namespace App\Mail;
 
+use App\Models\Project;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Project;
 
-class ProjectPublicationMail extends Mailable
+class DeletedProjectMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,8 +30,7 @@ class ProjectPublicationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Project Publication Mail',
-            replyTo: 'semmisno2@protonmail.com'
+            subject: 'Deleted Project Mail',
         );
     }
 
@@ -40,12 +39,9 @@ class ProjectPublicationMail extends Mailable
      */
     public function content(): Content
     {
-        $project = $this->project;
-        $text = $this->project->is_public ? 'New project published' : 'Project drafted';
-
         return new Content(
-            view: 'mails.projects.published',
-            with: compact('project', 'text'),
+            markdown: 'mails.projects.deleted',
+            with: ['project' => $this->project],
         );
     }
 
