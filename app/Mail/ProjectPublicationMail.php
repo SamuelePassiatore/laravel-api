@@ -8,17 +8,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Project;
 
 class ProjectPublicationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected Project $project;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($project)
     {
-        //
+        $this->project = $project;
     }
 
     /**
@@ -28,7 +31,7 @@ class ProjectPublicationMail extends Mailable
     {
         return new Envelope(
             subject: 'Project Publication Mail',
-            replyTo: 'samuw.978@gmail.com'
+            replyTo: 'semmisno2@protonmail.com'
         );
     }
 
@@ -39,6 +42,7 @@ class ProjectPublicationMail extends Mailable
     {
         return new Content(
             view: 'mails.projects.published',
+            with: ['title' => $this->project->title],
         );
     }
 
