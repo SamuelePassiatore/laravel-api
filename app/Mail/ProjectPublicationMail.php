@@ -44,7 +44,7 @@ class ProjectPublicationMail extends Mailable
         $text = $this->project->is_public ? 'New project published' : 'Project drafted';
 
         return new Content(
-            view: 'mails.projects.published',
+            markdown: 'mails.projects.published',
             with: compact('project', 'text'),
         );
     }
