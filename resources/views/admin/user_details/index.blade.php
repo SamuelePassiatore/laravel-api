@@ -71,10 +71,6 @@
                     <td>{{ $user_detail->getDateDiff('updated_at') }}</td>
                     <td>
                         <div class="d-flex">
-                            <a class="btn btn-sm btn-primary me-2"
-                                href="{{ route('admin.user_details.show', $user_detail->id) }}">
-                                <i class="fas fa-eye"></i>
-                            </a>
                             @if ($user_detail->user_id === Auth::id())
                                 <a class="btn btn-sm btn-warning"
                                     href="{{ route('admin.user_details.edit', $user_detail->id) }}">

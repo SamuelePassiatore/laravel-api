@@ -40,7 +40,7 @@ class UserDetailController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return to_route('admin.user_details.index');
     }
 
     /**
