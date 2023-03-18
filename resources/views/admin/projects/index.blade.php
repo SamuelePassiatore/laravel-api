@@ -117,7 +117,6 @@
                             @endif
                         </div>
                     </td>
-
                 </tr>
             @empty
                 <tr>

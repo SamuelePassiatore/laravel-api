@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\TechnologyController;
+use App\Http\Controllers\Admin\UserDetailController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Technology;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,8 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('/admin')->group
     Route::resource('technologies', TechnologyController::class);
     //Color technologies route
     Route::patch('/technologies/{technology}/patch', [TechnologyController::class, 'patch'])->name('technologies.patch');
+    //User details routes
+    Route::resource('user_details', UserDetailController::class);
 });
 
 // Profile routes
