@@ -16,7 +16,7 @@
             <label for="first_name" class="form-label">Name:</label>
             <input type="text" class="form-control w-25 @error('first_name') is-invalid @enderror" id="first_name"
                 placeholder="Insert name" name="first_name" required
-                value="{{ old('first_name', Auth::user()->user_detail?->first_name) }}">
+                value="{{ old('first_name', $user_detail->first_name) }}">
             @error('first_name')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -29,8 +29,7 @@
         <div class="mb-3">
             <label for="last_name" class="form-label">Surname:</label>
             <input type="text" class="form-control w-25 @error('last_name') is-invalid @enderror" id="last_name"
-                placeholder="Insert surname" name="last_name"
-                value="{{ old('last_name', Auth::user()->user_detail?->last_name) }}">
+                placeholder="Insert surname" name="last_name" value="{{ old('last_name', $user_detail->last_name) }}">
             @error('last_name')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -43,8 +42,7 @@
         <div class="mb-3">
             <label for="address" class="form-label">Address:</label>
             <input type="text" class="form-control w-25 @error('address') is-invalid @enderror" id="address"
-                placeholder="Insert address" name="address"
-                value="{{ old('address', Auth::user()->user_detail?->address) }}">
+                placeholder="Insert address" name="address" value="{{ old('address', $user_detail->address) }}">
             @error('address')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -57,8 +55,7 @@
         <div class="mb-3">
             <label for="phone" class="form-label">Phone:</label>
             <input type="text" class="form-control w-25 @error('phone') is-invalid @enderror" id="phone"
-                placeholder="Insert phone number" name="phone"
-                value="{{ old('phone', Auth::user()->user_detail?->phone) }}">
+                placeholder="Insert phone number" name="phone" value="{{ old('phone', $user_detail->phone) }}">
             @error('phone')
                 <div class="invalid-feedback">
                     {{ $message }}

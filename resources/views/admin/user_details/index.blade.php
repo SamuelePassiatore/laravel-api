@@ -35,13 +35,12 @@
                 <button class="btn btn-primary" type="submit">Filter</button>
             </form>
         </div> --}}
-        {{--        
+
         <div>
-            <a href="{{ route('admin.projects.create') }}" class="btn btn-success me-2">
-                <i class="fas fa-plus"></i>Add project
+            <a href="{{ route('admin.user_details.create') }}" class="btn btn-success me-2">
+                <i class="fas fa-plus"></i>Add user
             </a>
-            <a href="{{ route('admin.projects.trash.index') }}" class="btn btn-danger">Trash</a>
-        </div> --}}
+        </div>
     </header>
 
     <table class="table">
@@ -82,7 +81,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td scope="row" colspan="8" class="text-center">There aren't users with these
+                    <td scope="row" colspan="9" class="text-center">There aren't users with these
                         characteristics</td>
                 </tr>
             @endforelse
