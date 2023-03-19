@@ -66,6 +66,11 @@ class UserDetailController extends Controller
      */
     public function edit(UserDetail $user_detail)
     {
+        if ($user_detail->user_id !== Auth::id()) {
+            return to_route('admin.user_details.index', $user_detail->id)
+                ->with('type', 'danger')
+                ->with('message', "You are not authorized to edit this user");
+        }
         return view('admin.user_details.edit', compact('user_detail'));
     }
 
