@@ -72,7 +72,7 @@
                         <div class="d-flex">
                             @if ($user_detail->user_id === Auth::id())
                                 <a class="btn btn-sm btn-warning"
-                                    href="{{ route('admin.user_details.edit', $user_detail->id) }}">
+                                    href="{{ route('admin.user_details.edit', $user_detail->user_id) }}">
                                     <i class="fas fa-pencil"></i>
                                 </a>
                             @endif

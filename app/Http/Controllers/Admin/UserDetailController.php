@@ -39,7 +39,6 @@ class UserDetailController extends Controller
             'address' => 'nullable|string',
             'phone' => 'nullable|string',
             'date_of_birth' => 'nullable|date',
-            'user_id' => 'exists:users,id'
         ]);
 
         $data = $request->all();
@@ -85,15 +84,15 @@ class UserDetailController extends Controller
             'address' => 'nullable|string',
             'phone' => 'nullable|string',
             'date_of_birth' => 'nullable|date',
-            'user_id' => 'exists:users,id'
         ]);
 
         $data = $request->all();
 
-        $user_detail->fill($data);
-        $user_detail->save();
+        $user_detail->update($data);
 
-        return to_route('admin.user_details.index');
+        return to_route('admin.user_details.index', $user_detail->user_id)
+            ->with('type', 'success')
+            ->with('message', "Details of user '$user_detail->first_name $user_detail->last_name' has been successfully modified");
     }
 
     /**
